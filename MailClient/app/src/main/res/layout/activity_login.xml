@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity">
+
+    <EditText android:layout_width="300dp"
+              android:layout_height="50dp"
+              android:layout_marginTop="200dp"
+              android:id="@+id/username"
+              android:textAllCaps="false"
+              android:inputType="text"
+              android:hint="请输入您的账号"
+              android:autofillHints="@string/title_activity_login"
+              android:layout_centerHorizontal="true"/>
+
+    <EditText
+            android:layout_below="@+id/username"
+            android:layout_width="300dp"
+              android:layout_height="50dp"
+              android:layout_marginTop="50dp"
+              android:id="@+id/password"
+              android:textAllCaps="false"
+              android:inputType="text"
+              android:hint="请输入您的密码"
+              android:autofillHints="@string/title_activity_login"
+              android:layout_centerHorizontal="true"/>
+
+    <Button android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:id="@+id/btn_login"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/password"
+            android:layout_marginTop="60dp"
+            android:text="登录"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/forget_password"
+              android:text="忘记账号密码？"
+              android:layout_below="@+id/btn_login"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="20dp"/>
+</RelativeLayout>

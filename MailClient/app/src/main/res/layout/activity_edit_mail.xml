@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditMailActivity">
+    <EditText android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:hint="收件人"
+              android:id="@+id/mail_receiver"
+              />
+    <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/mail_receiver"
+            android:id="@+id/select_send_account"
+            />
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="570dp"
+                    android:id="@+id/content_layout"
+                    android:layout_below="@+id/select_send_account">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:minLines="1"
+                android:gravity="top"
+                android:hint="请输入邮件标题"
+                android:id="@+id/mail_subject"
+        />
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/mail_subject"
+                android:minLines="15"
+                android:gravity="top"
+                android:hint="请输入邮件内容"
+                android:id="@+id/mail_content"
+        />
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/content_layout">
+        <Button android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mail_send"
+                android:text="发送"/>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

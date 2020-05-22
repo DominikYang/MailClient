@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:icon="@mipmap/ic_launcher"
+            android:id="@+id/btn_setting"
+            android:title="设置" />
+
+</menu>
