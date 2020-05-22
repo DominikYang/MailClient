@@ -4,6 +4,7 @@ import com.lpq.mailclient.api.Api;
 import com.lpq.mailclient.dto.LoginDTO;
 import com.lpq.mailclient.entity.MailAccountInfo;
 import com.lpq.mailclient.entity.MailInfo;
+import com.lpq.mailclient.response.EmptyResponse;
 import com.lpq.mailclient.response.HelloResponse;
 import com.lpq.mailclient.response.LoginResponse;
 import com.lpq.mailclient.response.MailAccountInfoResponse;
@@ -13,6 +14,7 @@ import com.lpq.mailclient.utils.FastJsonUtils;
 import com.lpq.mailclient.utils.OkHttpUtil;
 import okhttp3.Response;
 
+import javax.xml.transform.OutputKeys;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,5 +94,65 @@ public class UserRequest {
             e.printStackTrace();
             return BaseResult.fail(CodeMessage.JSON_PARSE_ERROR);
         }
+    }
+
+    public BaseResult<Void> changeNickname(String nickname){
+        EmptyResponse response = new EmptyResponse();
+        Map<String,String> map = new HashMap<>();
+        map.put("nickname" , nickname);
+        Response data = OkHttpUtil.getInstance().postData(Api.CHANGE_NICK,map,UserRequest.token);
+        System.out.println(data);
+        try{
+            String result = data.body().string() ;
+            response = FastJsonUtils.jsonToObject(result,EmptyResponse.class);
+            if(response.getCode()==200){
+                return BaseResult.success(null);
+            }else {
+                return BaseResult.fail(new CodeMessage(response.getCode(),response.getMessage()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BaseResult.fail(CodeMessage.JSON_PARSE_ERROR);
+        }
+    }
+
+    public BaseResult<Void> changePassword(Map<String,String> map){
+        EmptyResponse response = new EmptyResponse();
+        Response data = OkHttpUtil.getInstance().postData(Api.CHANGE_PSW,map,UserRequest.token);
+        System.out.println(data);
+        try{
+            String result = data.body().string();
+            response = FastJsonUtils.jsonToObject(result,EmptyResponse.class);
+            if(response.getCode()==200){
+                return BaseResult.success(null);
+            }else{
+                return BaseResult.fail(new CodeMessage(response.getCode(),response.getMessage()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BaseResult.fail(CodeMessage.JSON_PARSE_ERROR);
+        }
+    }
+
+    public BaseResult<Void> addAccount(Map<String,String> body){
+        EmptyResponse response = new EmptyResponse();
+        Response data = OkHttpUtil.getInstance().postData(Api.ADD_ACCOUNT,body,UserRequest.token);
+        System.out.println(data);
+        try{
+            String result = data.body().string();
+            response = FastJsonUtils.jsonToObject(result,EmptyResponse.class);
+            if(response.getCode()==200){
+                return BaseResult.success(null);
+            }else{
+                return BaseResult.fail(new CodeMessage(response.getCode(),response.getMessage()));
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+            return BaseResult.fail(CodeMessage.JSON_PARSE_ERROR);
+        }
+    }
+
+    public void clearToken() {
+
     }
 }
