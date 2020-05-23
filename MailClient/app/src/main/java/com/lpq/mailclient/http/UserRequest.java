@@ -99,7 +99,7 @@ public class UserRequest {
     public BaseResult<Void> changeNickname(String nickname){
         EmptyResponse response = new EmptyResponse();
         Map<String,String> map = new HashMap<>();
-        map.put("nickname" , nickname);
+        map.put("nick_name" , nickname);
         Response data = OkHttpUtil.getInstance().postData(Api.CHANGE_NICK,map,UserRequest.token);
         System.out.println(data);
         try{
@@ -155,4 +155,10 @@ public class UserRequest {
     public void clearToken() {
 
     }
+
+
+
+
+
+
 }

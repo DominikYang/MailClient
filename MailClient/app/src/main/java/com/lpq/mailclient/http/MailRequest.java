@@ -1,7 +1,9 @@
 package com.lpq.mailclient.http;
 
 import com.lpq.mailclient.api.Api;
+import com.lpq.mailclient.entity.MailInfo;
 import com.lpq.mailclient.response.EmptyResponse;
+import com.lpq.mailclient.response.MailListResponse;
 import com.lpq.mailclient.result.BaseResult;
 import com.lpq.mailclient.result.CodeMessage;
 import com.lpq.mailclient.utils.FastJsonUtils;
@@ -9,6 +11,8 @@ import com.lpq.mailclient.utils.OkHttpUtil;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,5 +45,33 @@ public class MailRequest {
             e.printStackTrace();
             return BaseResult.fail(CodeMessage.MAIL_SEND_ERROR);
         }
+    }
+
+    /**
+     * description: 接收邮件 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.23 22:22 <br>
+     * author: Dominikyang <br>
+     *
+     * @param
+     * @return com.lpq.mailclient.result.BaseResult<java.util.List<com.lpq.mailclient.entity.MailInfo>>
+     */
+    public BaseResult<List<MailInfo>> receiveMails(){
+        MailListResponse response = new MailListResponse();
+
+        Response data = OkHttpUtil.getInstance().getData(Api.RECEIVE_MAIL, UserRequest.token);
+        try {
+            String result = data.body().string();
+            response = FastJsonUtils.jsonToObject(result,MailListResponse.class);
+            if(response.getCode() == 200){
+                return BaseResult.success(response.getData());
+            }else {
+                return BaseResult.fail(new CodeMessage(500,response.getMessage()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BaseResult.fail(CodeMessage.ANDROID_NET_ERROR);
+        }
+
     }
 }

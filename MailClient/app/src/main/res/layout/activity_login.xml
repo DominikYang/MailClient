@@ -39,8 +39,8 @@
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:id="@+id/forget_password"
-              android:text="忘记账号密码？"
+              android:id="@+id/btn_register"
+              android:text="注册"
               android:layout_below="@+id/btn_login"
               android:layout_centerHorizontal="true"
               android:layout_marginTop="20dp"/>

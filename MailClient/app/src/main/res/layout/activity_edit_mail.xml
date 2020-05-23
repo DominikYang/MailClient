@@ -18,7 +18,7 @@
             android:id="@+id/select_send_account"
             />
     <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="570dp"
+                    android:layout_height="600dp"
                     android:id="@+id/content_layout"
                     android:layout_below="@+id/select_send_account">
         <EditText
@@ -45,12 +45,8 @@
             android:layout_height="match_parent"
             android:layout_below="@id/content_layout">
         <Button android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/mail_send"
                 android:text="发送"/>
     </RelativeLayout>
-
-
-
-
 </RelativeLayout>

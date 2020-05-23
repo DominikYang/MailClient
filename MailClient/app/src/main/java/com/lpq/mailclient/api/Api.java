@@ -5,7 +5,7 @@ package com.lpq.mailclient.api;
  * @date 2020.05.20 17:22
  */
 public class Api {
-    public static final String BASE_URL = "http://192.168.43.66:8080/api/v1/";
+    public static final String BASE_URL = "http://192.168.43.1:8080/api/v1/";
 
     /**
      * description: 测试连接
@@ -49,4 +49,15 @@ public class Api {
      * 增加邮箱账户
      */
     public static final String ADD_ACCOUNT = BASE_URL + "user/addAccount" ;
+
+    /**
+     * description: 接收邮件 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.23 22:27 <br>
+     * author: Dominikyang <br>
+     * 
+     * @param null
+     * @return 
+     */ 
+    public static final String RECEIVE_MAIL = BASE_URL + "mail/list";
 }

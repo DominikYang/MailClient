@@ -2,15 +2,20 @@ package com.lpq.mailclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import com.lpq.mailclient.adapter.MailInfoAdapter;
 import com.lpq.mailclient.entity.MailInfo;
+import com.lpq.mailclient.http.MailRequest;
+import com.lpq.mailclient.result.BaseResult;
+import com.lpq.mailclient.result.CodeMessage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,21 +68,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-        mails.add(new MailInfo(1,1,"主题","18652736319@qq.com","18652736319@163.com","content",new Date()));
-
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MailRequest mailRequest = new MailRequest();
+                BaseResult<List<MailInfo>> listBaseResult = mailRequest.receiveMails();
+                if(listBaseResult.getCode() == 200){
+                    mails.addAll(listBaseResult.getData());
+                }else {
+                    Looper.prepare();
+                    Toast.makeText(MainActivity.this, listBaseResult.getMessage(),Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+            }
+        }).start();
     }
 
 }

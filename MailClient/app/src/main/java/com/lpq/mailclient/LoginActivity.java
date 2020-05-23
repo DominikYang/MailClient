@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText EditTetUsername = findViewById(R.id.username);
         final EditText EditTextPassword = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.btn_login);
-        TextView forgetPassword = findViewById(R.id.forget_password);
+        TextView registerButton = findViewById(R.id.btn_register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,25 +62,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        forgetPassword.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        UserRequest request = new UserRequest();
-                        BaseResult<String> hello = request.hello();
-                        if(hello.getCode() == 200){
-                            Looper.prepare();
-                            Toast.makeText(LoginActivity.this, hello.getData() ,Toast.LENGTH_SHORT).show();
-                            Looper.loop();
-                        }else {
-                            Looper.prepare();
-                            Toast.makeText(LoginActivity.this, hello.getMessage() ,Toast.LENGTH_SHORT).show();
-                            Looper.loop();
-                        }
-                    }
-                }).start();
+                Intent  intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
