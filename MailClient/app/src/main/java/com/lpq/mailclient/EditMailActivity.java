@@ -1,6 +1,8 @@
 package com.lpq.mailclient;
 
+import android.content.Intent;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +53,8 @@ public class EditMailActivity extends AppCompatActivity {
                         if(voidBaseResult.getCode() == 200){
                             Looper.prepare();
                             Toast.makeText(EditMailActivity.this, "发送成功",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditMailActivity.this,MainActivity.class);
+                            startActivity(intent);
                             finish();
                             Looper.loop();
                         }else {
@@ -99,5 +103,15 @@ public class EditMailActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(EditMailActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return true;
     }
 }

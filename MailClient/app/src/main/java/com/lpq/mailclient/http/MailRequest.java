@@ -3,6 +3,7 @@ package com.lpq.mailclient.http;
 import com.lpq.mailclient.api.Api;
 import com.lpq.mailclient.entity.MailInfo;
 import com.lpq.mailclient.response.EmptyResponse;
+import com.lpq.mailclient.response.MailDetailsResponse;
 import com.lpq.mailclient.response.MailListResponse;
 import com.lpq.mailclient.result.BaseResult;
 import com.lpq.mailclient.result.CodeMessage;
@@ -72,6 +73,22 @@ public class MailRequest {
             e.printStackTrace();
             return BaseResult.fail(CodeMessage.ANDROID_NET_ERROR);
         }
+    }
 
+    public BaseResult<MailInfo> mailDetails(Map<String,String> body){
+        MailDetailsResponse mailDetailsResponse = new MailDetailsResponse();
+        Response response = OkHttpUtil.getInstance().postData(Api.MAIL_DATAILS, body);
+        try {
+            String result = response.body().string();
+            mailDetailsResponse = FastJsonUtils.jsonToObject(result,MailDetailsResponse.class);
+            if(mailDetailsResponse.getCode() == 200){
+                return BaseResult.success(mailDetailsResponse.getData());
+            }else {
+                return BaseResult.fail(new CodeMessage(500,mailDetailsResponse.getMessage()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BaseResult.fail(CodeMessage.ANDROID_NET_ERROR);
+        }
     }
 }

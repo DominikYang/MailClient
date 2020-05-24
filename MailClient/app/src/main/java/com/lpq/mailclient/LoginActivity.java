@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                             }else {
                                 Looper.prepare();
                                 Toast.makeText(LoginActivity.this, login.getMessage(),Toast.LENGTH_SHORT).show();
+                                finish();
                                 Looper.loop();
                             }
                         } catch (Exception e) {

@@ -57,6 +57,15 @@ public class UserRequest {
         return BaseResult.success(loginResponse.getData());
     }
 
+    /**
+     * description: 测试连接 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param
+     * @return com.lpq.mailclient.result.BaseResult<java.lang.String>
+     */
     public BaseResult<String> hello() {
         HelloResponse helloResponse = new HelloResponse();
         Response data = OkHttpUtil.getInstance().getData(Api.HELLO + "/android");
@@ -72,6 +81,15 @@ public class UserRequest {
         return BaseResult.success(helloResponse.getData());
     }
 
+    /**
+     * description: 获取用户信息 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param
+     * @return com.lpq.mailclient.result.BaseResult<java.util.List<com.lpq.mailclient.entity.MailAccountInfo>>
+     */
     public BaseResult<List<MailAccountInfo>> userMailInfos() {
         MailAccountInfoResponse response = new MailAccountInfoResponse();
         Response data = OkHttpUtil.getInstance().getData(Api.USER_MAIL_ACCOUNT, UserRequest.token);
@@ -96,6 +114,15 @@ public class UserRequest {
         }
     }
 
+    /**
+     * description: 修改昵称 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param nickname
+     * @return com.lpq.mailclient.result.BaseResult<java.lang.Void>
+     */
     public BaseResult<Void> changeNickname(String nickname){
         EmptyResponse response = new EmptyResponse();
         Map<String,String> map = new HashMap<>();
@@ -116,6 +143,15 @@ public class UserRequest {
         }
     }
 
+    /**
+     * description: 修改密码 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param map
+     * @return com.lpq.mailclient.result.BaseResult<java.lang.Void>
+     */
     public BaseResult<Void> changePassword(Map<String,String> map){
         EmptyResponse response = new EmptyResponse();
         Response data = OkHttpUtil.getInstance().postData(Api.CHANGE_PSW,map,UserRequest.token);
@@ -134,6 +170,15 @@ public class UserRequest {
         }
     }
 
+    /**
+     * description: 添加第三方邮箱 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param body
+     * @return com.lpq.mailclient.result.BaseResult<java.lang.Void>
+     */
     public BaseResult<Void> addAccount(Map<String,String> body){
         EmptyResponse response = new EmptyResponse();
         Response data = OkHttpUtil.getInstance().postData(Api.ADD_ACCOUNT,body,UserRequest.token);
@@ -152,13 +197,43 @@ public class UserRequest {
         }
     }
 
+    /**
+     * description: 退出当前账户 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:29 <br>
+     * author: Dominikyang <br>
+     *
+     * @param
+     * @return void
+     */
     public void clearToken() {
 
     }
 
-
-
-
-
+    /**
+     * description: 用户注册 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:32 <br>
+     * author: Dominikyang <br>
+     *
+     * @param body
+     * @return com.lpq.mailclient.result.BaseResult<java.lang.Void>
+     */
+    public BaseResult<Void> register(Map<String,String> body){
+        EmptyResponse emptyResponse = new EmptyResponse();
+        Response response = OkHttpUtil.getInstance().postData(Api.REGESTER, body);
+        try {
+            String result = response.body().string();
+            emptyResponse = FastJsonUtils.jsonToObject(result,EmptyResponse.class);
+            if(emptyResponse.getCode() == 200){
+                return BaseResult.success(null);
+            }else {
+                return BaseResult.fail(new CodeMessage(500,"注册失败"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return BaseResult.fail(new CodeMessage(500,"注册失败"));
+        }
+    }
 
 }

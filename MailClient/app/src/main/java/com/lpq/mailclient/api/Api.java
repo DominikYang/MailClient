@@ -60,4 +60,26 @@ public class Api {
      * @return 
      */ 
     public static final String RECEIVE_MAIL = BASE_URL + "mail/list";
+    
+    /**
+     * description: 用户注册 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 12:31 <br>
+     * author: Dominikyang <br>
+     * 
+     * @param null
+     * @return
+     */ 
+    public static final String REGESTER = BASE_URL + "user/register";
+    
+    /**
+     * description: 邮件详情 <br>
+     * version: 1.0 <br>
+     * date: 2020.05.24 17:43 <br>
+     * author: Dominikyang <br>
+     * 
+     * @param null
+     * @return 
+     */ 
+    public static final String MAIL_DATAILS = BASE_URL + "mail/details";
 }

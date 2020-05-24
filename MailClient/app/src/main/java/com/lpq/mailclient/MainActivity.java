@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,14 +35,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("收件箱");
 
-        initData();
-
         FloatingActionButton floatingActionButton = findViewById(R.id.float_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,EditMailActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -56,9 +56,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        initData();
 
-        MailInfoAdapter adapter = new MailInfoAdapter(MainActivity.this, R.layout.mail_item,mails);
+        final MailInfoAdapter adapter = new MailInfoAdapter(MainActivity.this,mails);
         homeListView.setAdapter(adapter);
+
+        homeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MailInfo info = (MailInfo) adapter.getItem(position);
+                Intent intent = new Intent(MainActivity.this,MailDetailsActivity.class);
+                intent.putExtra("mailId", info.getId().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 MailRequest mailRequest = new MailRequest();
@@ -76,12 +87,21 @@ public class MainActivity extends AppCompatActivity {
                 if(listBaseResult.getCode() == 200){
                     mails.addAll(listBaseResult.getData());
                 }else {
+                    mails = new ArrayList<>();
                     Looper.prepare();
                     Toast.makeText(MainActivity.this, listBaseResult.getMessage(),Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
-        }).start();
+        });
+
+        thread.start();
+        // 数据
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
