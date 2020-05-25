@@ -11,12 +11,15 @@ import com.lpq.mailclient.api.Api;
 import com.lpq.mailclient.http.UserRequest;
 import com.lpq.mailclient.result.BaseResult;
 
+import java.util.Objects;
+
 public class ChangeNicknameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_nickname);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("修改昵称");
 
         final EditText EditNickname = findViewById(R.id.new_nickname);
         Button submitButton = findViewById(R.id.nickname_submit);

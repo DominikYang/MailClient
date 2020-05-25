@@ -13,10 +13,7 @@ import com.lpq.mailclient.http.MailRequest;
 import com.lpq.mailclient.http.UserRequest;
 import com.lpq.mailclient.result.BaseResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
@@ -30,6 +27,7 @@ public class EditMailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_mail);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("写信");
 
         final EditText editMailReceiver = findViewById(R.id.mail_receiver);
         spinnerSelectSendAccount = findViewById(R.id.select_send_account);
@@ -66,7 +64,6 @@ public class EditMailActivity extends AppCompatActivity {
                 }).start();
             }
         });
-
         bindSpinner();
     }
 

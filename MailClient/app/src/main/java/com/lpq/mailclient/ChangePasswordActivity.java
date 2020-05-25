@@ -12,6 +12,7 @@ import com.lpq.mailclient.result.BaseResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle("修改密码");
         final EditText EditNewPassword = findViewById(R.id.new_password);
         final EditText EditOldPassword = findViewById(R.id.old_password);
         Button submitButton = findViewById(R.id.password_submit);

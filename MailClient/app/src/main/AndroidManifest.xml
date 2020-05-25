@@ -26,8 +26,7 @@
         <activity android:name=".MailDetailsActivity">
         </activity>
         <activity
-                android:name=".SettingActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:name=".SettingActivity">
         </activity>
         <activity android:name=".EditMailActivity">
         </activity>

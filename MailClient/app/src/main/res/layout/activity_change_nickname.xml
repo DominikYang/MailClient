@@ -6,29 +6,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ChangeNicknameActivity">
-    <EditText android:layout_width="match_parent"
-              android:layout_height="75dp"
-              android:id="@+id/change_nick_head"
-              android:editable="false"
-              android:text="修改昵称"
-              android:textAlignment="center"
-    />
     <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="570dp"
-                    android:layout_below="@id/change_nick_head"
+                    android:layout_height="match_parent"
                     android:id="@+id/change_nick">
-        <EditText android:layout_width="match_parent"
+        <EditText android:layout_width="350dp"
                   android:layout_height="50dp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="320dp"
                   android:id="@+id/new_nickname"
                   android:hint="输入新昵称"
         />
-    </RelativeLayout>
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/change_nick">
-        <Button android:layout_width="match_parent"
+        <Button android:layout_width="350dp"
+                android:layout_below="@id/new_nickname"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
                 android:id="@+id/nickname_submit"
                 android:text="提交"/>
     </RelativeLayout>

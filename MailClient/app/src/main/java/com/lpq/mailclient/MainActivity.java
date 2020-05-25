@@ -21,6 +21,7 @@ import com.lpq.mailclient.result.CodeMessage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         ListView homeListView = findViewById(R.id.home_list_view);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("收件箱");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("收件箱");
 
         FloatingActionButton floatingActionButton = findViewById(R.id.float_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

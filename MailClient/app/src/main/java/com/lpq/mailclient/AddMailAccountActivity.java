@@ -12,6 +12,7 @@ import com.lpq.mailclient.result.BaseResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class AddMailAccountActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class AddMailAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mail_account);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("添加邮箱账号POP3/SMTP");
 
         final EditText EditAccount = findViewById(R.id.add_account);
         final EditText EditPsw = findViewById(R.id.add_pwd);
