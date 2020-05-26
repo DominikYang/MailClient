@@ -18,7 +18,7 @@
             android:id="@+id/select_send_account"
             />
     <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="600dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/content_layout"
                     android:layout_below="@+id/select_send_account">
         <EditText
@@ -31,9 +31,9 @@
         />
         <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="450dp"
                 android:layout_below="@id/mail_subject"
-                android:minLines="15"
+                android:minLines="10"
                 android:gravity="top"
                 android:hint="请输入邮件内容"
                 android:id="@+id/mail_content"

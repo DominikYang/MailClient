@@ -18,6 +18,7 @@ public class Api {
      * description: 登录
      * @author: Wei Yuyang
      * @time: 2020.05.20
+     * http://192.168.43.1:8080/api/v1/user/login
      */
     public static final String LOGIN = BASE_URL + "user/login";
 
