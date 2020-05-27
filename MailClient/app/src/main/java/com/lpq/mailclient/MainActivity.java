@@ -3,6 +3,7 @@ package com.lpq.mailclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
@@ -103,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return true;
     }
 
 }
